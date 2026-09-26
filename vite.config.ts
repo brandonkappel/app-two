@@ -8,8 +8,13 @@ import vue from '@vitejs/plugin-vue';
 // FIXED, unhashed output filename - the shell references this exact
 // path, so it can't change between deploys. This is what gets deployed
 // to s3://<app-one-bucket>/assets/app-one/ (see README.md).
-export default defineConfig({
+export default defineConfig (({ command }) =>  ({
   plugins: [vue()],
+  define: {
+    'process.env.NODE_ENV': JSON.stringify(
+      command === 'build' ? 'production' : 'development'
+    ),
+  },
   build: {
     outDir: 'dist',
     lib: {
@@ -31,4 +36,4 @@ export default defineConfig({
     // becomes a real concern.
     cssCodeSplit: false,
   },
-});
+}));
