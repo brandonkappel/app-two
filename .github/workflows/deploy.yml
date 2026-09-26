@@ -34,3 +34,4 @@ jobs:
           AWS_REGION: "us-east-2"
           SOURCE_DIR: "dist"
           DEST_DIR: "assets/app-two"
+          CACHE_CONTROL: "no-cache"
